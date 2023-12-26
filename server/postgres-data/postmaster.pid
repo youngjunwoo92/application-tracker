@@ -1,8 +1,8 @@
 1
 /var/lib/postgresql/data
-1703574991
+1703594967
 5432
 /var/run/postgresql
 *
-   176840         5
+   176840         0
 ready   
