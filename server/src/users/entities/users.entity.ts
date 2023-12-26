@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   Column,
   Entity,
+  OneToMany,
 } from 'typeorm';
 
 import { RolesEnum } from '../const/roles.const';
+import { ApplicationsModel } from 'src/applications/entities/applications.entity';
 
 @Entity()
 export class UsersModel {
@@ -18,6 +20,9 @@ export class UsersModel {
   email: string;
 
   @Column()
+  username: string;
+
+  @Column()
   password: string;
 
   @Column({
@@ -28,4 +33,7 @@ export class UsersModel {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(() => ApplicationsModel, (application) => application.author)
+  applications: ApplicationsModel[];
 }
