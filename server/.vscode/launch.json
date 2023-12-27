@@ -12,7 +12,6 @@
       "runtimeArgs": ["run", "start:debug"],
       "console": "integratedTerminal",
       "restart": true,
-      "port": 9229,
       "autoAttachChildProcesses": true
     }
   ]

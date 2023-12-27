@@ -1,15 +1,22 @@
 import {
+  ParseIntPipe,
   Controller,
+  UseGuards,
   Delete,
   Param,
   Post,
   Body,
   Get,
   Put,
+  Patch,
 } from '@nestjs/common';
 
+import { AccessTokenGuard } from 'src/auth/guard/bearerToken.guard';
 import { ApplicationsModel } from './entities/applications.entity';
 import { ApplicationsService } from './applications.service';
+import { User } from 'src/users/decorator/user.decorator';
+import { CreateApplicationDto } from './dto/create-application.dto';
+import { UpdateApplicationDto } from './dto/update-application.dto';
 
 @Controller('applications')
 export class ApplicationsController {
@@ -23,53 +30,32 @@ export class ApplicationsController {
 
   // Get Application By Application ID
   @Get(':id')
-  getApplication(@Param('id') applicationId: number) {
+  getApplication(@Param('id', ParseIntPipe) applicationId: number) {
     return this.applicationsService.getApplicationById(applicationId);
   }
 
   // Create New Application
   @Post()
+  @UseGuards(AccessTokenGuard)
   postApplication(
-    @Body('authorId') authorId: number,
-    @Body('company') company: string,
-    @Body('position') position: string,
-    @Body('description') description: string,
-    @Body('location') location?: string,
-    @Body('salary') salary?: number,
+    @User('id') userId: number,
+    @Body() body: CreateApplicationDto,
   ): Promise<ApplicationsModel> {
-    return this.applicationsService.createApplication(
-      authorId,
-      company,
-      position,
-      description,
-      location,
-      salary,
-    );
+    return this.applicationsService.createApplication(userId, body);
   }
 
   // Update existing application
-  @Put(':id')
-  putApplication(
-    @Param('id') applicationId: number,
-    @Body('company') company?: string,
-    @Body('position') position?: string,
-    @Body('description') description?: string,
-    @Body('location') location?: string,
-    @Body('salary') salary?: number,
+  @Patch(':id')
+  patchApplication(
+    @Param('id', ParseIntPipe) applicationId: number,
+    @Body() body: UpdateApplicationDto,
   ) {
-    return this.applicationsService.updateApplication(
-      applicationId,
-      company,
-      position,
-      description,
-      location,
-      salary,
-    );
+    return this.applicationsService.updateApplication(applicationId, body);
   }
 
   // Remove application
   @Delete(':id')
-  async deleteApplication(@Param('id') applicationId: number) {
+  async deleteApplication(@Param('id', ParseIntPipe) applicationId: number) {
     await this.applicationsService.deleteApplication(applicationId);
 
     return applicationId;

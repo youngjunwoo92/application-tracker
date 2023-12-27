@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { ApplicationsModel } from './entities/applications.entity';
+import { CreateApplicationDto } from './dto/create-application.dto';
+import { UpdateApplicationDto } from './dto/update-application.dto';
 
 @Injectable()
 export class ApplicationsService {
@@ -30,21 +32,13 @@ export class ApplicationsService {
 
   async createApplication(
     authorId: number,
-    company: string,
-    position: string,
-    description: string,
-    location?: string,
-    salary?: number,
+    applicationDto: CreateApplicationDto,
   ) {
     const application = this.applicationsRepository.create({
+      ...applicationDto,
       author: {
         id: authorId,
       },
-      company,
-      position,
-      description,
-      location,
-      salary,
     });
 
     const newPost = await this.applicationsRepository.save(application);
@@ -53,11 +47,7 @@ export class ApplicationsService {
 
   async updateApplication(
     applicationId: number,
-    company?: string,
-    position?: string,
-    description?: string,
-    location?: string,
-    salary?: number,
+    applicationDto: UpdateApplicationDto,
   ) {
     const application = await this.applicationsRepository.findOne({
       where: {
@@ -69,11 +59,7 @@ export class ApplicationsService {
 
     const newApplication = await this.applicationsRepository.save({
       ...application,
-      company: company || application.company,
-      position: position || application.position,
-      description: description || application.description,
-      location: location || application.location,
-      salary: salary || application.salary,
+      ...applicationDto,
     });
 
     return newApplication;

@@ -1,28 +1,29 @@
-import {
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  Column,
-  Entity,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+
+import { ApplicationsModel } from 'src/applications/entities/applications.entity';
+import { BaseModel } from 'src/common/entity/base.entity';
 
 import { RolesEnum } from '../const/roles.const';
-import { ApplicationsModel } from 'src/applications/entities/applications.entity';
+import { IsEmail, IsString, Length } from 'class-validator';
+import { Exclude } from 'class-transformer';
 
 @Entity()
-export class UsersModel {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class UsersModel extends BaseModel {
   @Column({
     unique: true,
   })
+  @IsString()
+  @IsEmail()
   email: string;
 
   @Column()
+  @IsString()
   username: string;
 
   @Column()
+  @IsString()
+  @Length(8, 16, { message: 'Password must be 8 - 16 chracters' })
+  @Exclude({ toPlainOnly: true })
   password: string;
 
   @Column({
@@ -30,9 +31,6 @@ export class UsersModel {
     default: RolesEnum.USER,
   })
   role: RolesEnum;
-
-  @CreateDateColumn()
-  createdAt: Date;
 
   @OneToMany(() => ApplicationsModel, (application) => application.author)
   applications: ApplicationsModel[];

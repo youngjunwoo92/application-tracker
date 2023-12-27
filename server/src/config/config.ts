@@ -1,30 +1,24 @@
-interface JWTConfigProps {
-  secret: string;
-  accessTokenExpiration: number;
-  refreshTokenExpiration: number;
-}
-
-interface BcryptConfigProps {
-  hashRounds: number;
-}
-
-interface DbConfigProps {
-  host: string;
-  port: number;
-  username: string;
-  password: string;
-  database: string;
-}
-
-interface ConfigProps {
-  jwt: JWTConfigProps;
-  bcrypt: BcryptConfigProps;
+type Config = {
+  jwt: {
+    secret: string;
+    accessTokenExpiration: number;
+    refreshTokenExpiration: number;
+  };
+  bcrypt: {
+    hashRounds: number;
+  };
   protocol: string;
   host: string;
-  database: DbConfigProps;
-}
+  database: {
+    host: string;
+    port: number;
+    username: string;
+    password: string;
+    database: string;
+  };
+};
 
-export const config = (): ConfigProps => ({
+export const config = (): Config => ({
   jwt: {
     secret: process.env.JWT_SECRET,
     accessTokenExpiration: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRES_IN),
