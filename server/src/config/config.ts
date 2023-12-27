@@ -7,6 +7,7 @@ type Config = {
   bcrypt: {
     hashRounds: number;
   };
+  baseUrl: string;
   protocol: string;
   host: string;
   database: {
@@ -27,6 +28,7 @@ export const config = (): Config => ({
   bcrypt: {
     hashRounds: parseInt(process.env.BCRYPT_HASH_ROUNDS),
   },
+  baseUrl: process.env.BASE_URL,
   protocol: process.env.PROTOCOL,
   host: process.env.HOST || 'localhost:3000',
   database: {

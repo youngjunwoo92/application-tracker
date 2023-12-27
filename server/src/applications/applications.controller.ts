@@ -4,11 +4,11 @@ import {
   UseGuards,
   Delete,
   Param,
+  Patch,
   Post,
   Body,
   Get,
-  Put,
-  Patch,
+  Query,
 } from '@nestjs/common';
 
 import { AccessTokenGuard } from 'src/auth/guard/bearerToken.guard';
@@ -17,15 +17,16 @@ import { ApplicationsService } from './applications.service';
 import { User } from 'src/users/decorator/user.decorator';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
+import { PaginateApplicationDto } from './dto/pagenate-application.dto';
 
 @Controller('applications')
 export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
-  // Get ALl Application
   @Get()
-  getApplications(): Promise<ApplicationsModel[]> {
-    return this.applicationsService.getAllApplications();
+  getApplications(@Query() query: PaginateApplicationDto) {
+    return this.applicationsService.paginateApplications(query);
+    // return this.applicationsService.getAllApplications();
   }
 
   // Get Application By Application ID
@@ -59,5 +60,10 @@ export class ApplicationsController {
     await this.applicationsService.deleteApplication(applicationId);
 
     return applicationId;
+  }
+
+  @Post('random')
+  async createRandomApplications() {
+    return this.applicationsService.generateApplications(2);
   }
 }

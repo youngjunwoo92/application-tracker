@@ -1,7 +1,7 @@
 export enum StatusEnum {
-  APPLIED = 'Applied',
-  INTERVIEWED = 'Interviewed',
-  REJECTED = 'Rejected',
-  OFFER = 'Offer',
-  NOT_SELECTED = 'Not Selected',
+  APPLIED = 'applied',
+  INTERVIEWED = 'interviewed',
+  REJECTED = 'rejected',
+  OFFER = 'offer',
+  NOT_SELECTED = 'not_selected',
 }
