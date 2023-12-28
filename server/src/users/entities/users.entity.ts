@@ -1,19 +1,19 @@
+import { IsEmail, IsString, Matches } from 'class-validator';
 import { Column, Entity, OneToMany } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 import { ApplicationsModel } from 'src/applications/entities/applications.entity';
+import { PASSWORD_REGEX } from '../const/password-regex.const';
 import { BaseModel } from 'src/common/entities/base.entity';
-
 import { RolesEnum } from '../const/roles.const';
-import { IsEmail, IsString, Length } from 'class-validator';
-import { Exclude } from 'class-transformer';
 
 @Entity()
 export class UsersModel extends BaseModel {
   @Column({
     unique: true,
   })
-  @IsString()
   @IsEmail()
+  @IsString()
   email: string;
 
   @Column()
@@ -22,7 +22,10 @@ export class UsersModel extends BaseModel {
 
   @Column()
   @IsString()
-  @Length(8, 16, { message: 'Password must be 8 - 16 chracters' })
+  @Matches(PASSWORD_REGEX, {
+    message:
+      'Password must be between 8 and 16 characters and include a number, lowercase letter, uppercase letter, and a special character.',
+  })
   @Exclude({ toPlainOnly: true })
   password: string;
 
