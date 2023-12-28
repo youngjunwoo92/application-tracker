@@ -4,8 +4,8 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 import { UsersModel } from 'src/users/entities/users.entity';
-import { UsersService } from 'src/users/users.service';
 import { RegisterUserDto } from './dto/register-user.dto';
+import { UsersService } from 'src/users/users.service';
 
 type TokenType = 'access' | 'refresh';
 
@@ -41,8 +41,6 @@ export class AuthService {
     }
 
     const [email, password] = split;
-
-    console.log(email, password);
 
     return { email, password };
   }

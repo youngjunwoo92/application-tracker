@@ -1,7 +1,8 @@
 import { Body, Controller, Headers, Post, UseGuards } from '@nestjs/common';
 
-import { RefreshTokenGuard } from './guard/bearerToken.guard';
-import { BasicTokenGuard } from './guard/basicToken.guard';
+import { IsPublic } from 'src/common/decorator/is-public.decorator';
+import { RefreshTokenGuard } from './guard/bearer-token.guard';
+import { BasicTokenGuard } from './guard/basic-token.guard';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { AuthService } from './auth.service';
 
@@ -10,6 +11,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('token/access')
+  @IsPublic()
   @UseGuards(RefreshTokenGuard)
   createAccessToken(@Headers('authorization') authorizationHeader: string) {
     const token = this.authService.extractTokenFromHeader(
@@ -23,6 +25,7 @@ export class AuthController {
   }
 
   @Post('token/refresh')
+  @IsPublic()
   @UseGuards(RefreshTokenGuard)
   createRefreshToken(@Headers('authorization') authorizationHeader: string) {
     const token = this.authService.extractTokenFromHeader(
@@ -36,6 +39,7 @@ export class AuthController {
   }
 
   @Post('login/email')
+  @IsPublic()
   @UseGuards(BasicTokenGuard)
   loginWithEmail(@Headers('authorization') authorizationHeader: string) {
     const basicToken = this.authService.extractTokenFromHeader(
@@ -47,6 +51,7 @@ export class AuthController {
   }
 
   @Post('register/email')
+  @IsPublic()
   registerWithEmail(@Body() body: RegisterUserDto) {
     return this.authService.registerWithEmail(body);
   }

@@ -1,8 +1,5 @@
-import {
-  InternalServerErrorException,
-  createParamDecorator,
-  ExecutionContext,
-} from '@nestjs/common';
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+
 import { UsersModel } from '../entities/users.entity';
 
 export const User = createParamDecorator(
@@ -11,11 +8,11 @@ export const User = createParamDecorator(
 
     const user = req.user as UsersModel;
 
-    if (!user) {
-      throw new InternalServerErrorException(
-        'User decorator must be used with AccessTokenGuard',
-      );
-    }
+    // if (!user) {
+    //   throw new InternalServerErrorException(
+    //     'User decorator must be used with AccessTokenGuard',
+    //   );
+    // }
 
     if (data) {
       return user[data];

@@ -1,8 +1,8 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsString } from 'class-validator';
 import { ManyToOne, Column, Entity } from 'typeorm';
 
 import { UsersModel } from 'src/users/entities/users.entity';
-import { BaseModel } from 'src/common/entity/base.entity';
+import { BaseModel } from 'src/common/entities/base.entity';
 
 import { StatusEnum } from '../const/status.const';
 
@@ -32,8 +32,10 @@ export class ApplicationsModel extends BaseModel {
   salary?: number;
 
   @Column({
-    enum: Object.values(StatusEnum),
+    enum: StatusEnum,
     default: StatusEnum.APPLIED,
   })
+  @IsEnum(StatusEnum)
+  @IsString()
   status: StatusEnum;
 }

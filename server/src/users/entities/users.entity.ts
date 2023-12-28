@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 
 import { ApplicationsModel } from 'src/applications/entities/applications.entity';
-import { BaseModel } from 'src/common/entity/base.entity';
+import { BaseModel } from 'src/common/entities/base.entity';
 
 import { RolesEnum } from '../const/roles.const';
 import { IsEmail, IsString, Length } from 'class-validator';

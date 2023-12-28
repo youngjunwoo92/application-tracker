@@ -1,7 +1,6 @@
 import { FindOptionsWhere, LessThan, MoreThan, Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ConfigService } from '@nestjs/config';
 
 import { PaginateApplicationDto } from './dto/pagenate-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
@@ -13,29 +12,30 @@ export class ApplicationsService {
   constructor(
     @InjectRepository(ApplicationsModel)
     private readonly applicationsRepository: Repository<ApplicationsModel>,
-    private readonly configService: ConfigService,
   ) {}
 
-  async generateApplications(userId: number) {
-    for (let i = 0; i < 100; i++) {
-      await this.createApplication(userId, {
-        company: `Company ${i}`,
-        position: `Position ${i}`,
-        description: `Description ${i}`,
-      });
-    }
+  // async generateApplications(userId: number) {
+  //   for (let i = 0; i < 100; i++) {
+  //     await this.createApplication(userId, {
+  //       company: `Company ${i}`,
+  //       position: `Position ${i}`,
+  //       description: `Description ${i}`,
+  //     });
+  //   }
+  // }
+
+  async getAllApplications() {
+    return this.applicationsRepository.find({
+      relations: ['author'],
+    });
   }
 
-  async paginateApplications(dto: PaginateApplicationDto) {
+  async getApplicationsWithFilter(userId: number, dto: PaginateApplicationDto) {
     const where: FindOptionsWhere<ApplicationsModel> = {};
     const { cursor, order, status, limit } = dto;
 
-    if (cursor != null && order === 'ASC') {
-      where.id = MoreThan(cursor);
-    }
-
-    if (cursor != null && order === 'DESC') {
-      where.id = LessThan(cursor);
+    if (cursor != null) {
+      where.id = order === 'ASC' ? MoreThan(cursor) : LessThan(cursor);
     }
 
     if (status) {
@@ -43,11 +43,14 @@ export class ApplicationsService {
     }
 
     const applications = await this.applicationsRepository.find({
-      where,
+      where: { ...where, author: { id: userId } },
       order: {
         createdAt: order,
       },
       take: limit,
+      relations: {
+        author: true,
+      },
     });
 
     const isLast = applications.length !== limit;
@@ -56,14 +59,8 @@ export class ApplicationsService {
     return { data: applications, isLast, nextCursor };
   }
 
-  async getAllApplications() {
-    return this.applicationsRepository.find({
-      relations: ['author'],
-    });
-  }
-
   async getApplicationById(applicationId: number) {
-    const application = this.applicationsRepository.findOne({
+    const application = await this.applicationsRepository.findOne({
       where: { id: applicationId },
       relations: ['author'],
     });
@@ -84,8 +81,8 @@ export class ApplicationsService {
       },
     });
 
-    const newPost = await this.applicationsRepository.save(application);
-    return newPost;
+    const newApplication = await this.applicationsRepository.save(application);
+    return newApplication;
   }
 
   async updateApplication(
@@ -93,9 +90,7 @@ export class ApplicationsService {
     applicationDto: UpdateApplicationDto,
   ) {
     const application = await this.applicationsRepository.findOne({
-      where: {
-        id: applicationId,
-      },
+      where: { id: applicationId },
     });
 
     if (!application) throw new NotFoundException();
@@ -118,6 +113,21 @@ export class ApplicationsService {
     if (!application) throw new NotFoundException();
 
     await this.applicationsRepository.delete(applicationId);
+
     return applicationId;
+  }
+
+  async isApplicationMine(userId: number, applicationId: number) {
+    return await this.applicationsRepository.exist({
+      where: {
+        id: applicationId,
+        author: {
+          id: userId,
+        },
+      },
+      relations: {
+        author: true,
+      },
+    });
   }
 }
