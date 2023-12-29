@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
+import ThemeSwitcher from './components/ThemeSwitcher';
+
 function App() {
+  useEffect(() => {
+    localStorage.setItem('theme', 'light');
+  }, []);
   return (
     <>
-      <h1>Hello World</h1>
+      <div>
+        <h1>Hello World</h1>
+      </div>
+      <ThemeSwitcher />
     </>
   );
 }

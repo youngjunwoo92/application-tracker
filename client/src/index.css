@@ -2,19 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@layer base {
+  :root {
+    --color-background-000: hsl(228, 100%, 100%);
+    --color-background-005: hsl(228, 100%, 98%);
+    --color-background-010: hsl(226, 35%, 93%);
+    --color-background-015: hsl(228, 24%, 88%);
+    --color-background-020: hsl(227, 17%, 77%);
+    --color-background-030: hsl(229, 13%, 67%);
+    --color-background-040: hsl(227, 11%, 57%);
+    --color-background-050: hsl(227, 9%, 48%);
+    --color-background-060: hsl(226, 11%, 39%);
+    --color-background-070: hsl(224, 13%, 30%);
+    --color-background-080: hsl(228, 14%, 21%);
+    --color-background-085: hsl(228, 16%, 13%);
+    --color-background-090: hsl(231, 16%, 8%);
+    --color-background-095: hsl(225, 18%, 4%);
+    --color-background-100: hsl(225, 0%, 0%);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    --color-foreground-100: hsl(225, 0%, 0%);
+    --color-foreground-095: hsl(225, 18%, 4%);
+    --color-foreground-090: hsl(231, 16%, 8%);
+    --color-foreground-085: hsl(228, 16%, 13%);
+    --color-foreground-080: hsl(228, 14%, 21%);
+    --color-foreground-070: hsl(224, 13%, 30%);
+    --color-foreground-060: hsl(226, 11%, 39%);
+    --color-foreground-050: hsl(227, 9%, 48%);
+    --color-foreground-040: hsl(227, 11%, 57%);
+    --color-foreground-030: hsl(229, 13%, 67%);
+    --color-foreground-020: hsl(227, 17%, 77%);
+    --color-foreground-015: hsl(228, 24%, 88%);
+    --color-foreground-010: hsl(226, 35%, 93%);
+    --color-foreground-005: hsl(228, 100%, 98%);
+    --color-foreground-000: hsl(228, 100%, 100%);
+  }
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  .dark {
+    --color-background-000: hsl(225, 0%, 0%);
+    --color-background-005: hsl(225, 18%, 4%);
+    --color-background-010: hsl(231, 16%, 8%);
+    --color-background-015: hsl(228, 16%, 13%);
+    --color-background-020: hsl(228, 14%, 21%);
+    --color-background-030: hsl(224, 13%, 30%);
+    --color-background-040: hsl(226, 11%, 39%);
+    --color-background-050: hsl(227, 9%, 48%);
+    --color-background-060: hsl(227, 11%, 57%);
+    --color-background-070: hsl(229, 13%, 67%);
+    --color-background-080: hsl(227, 17%, 77%);
+    --color-background-085: hsl(228, 24%, 88%);
+    --color-background-090: hsl(226, 35%, 93%);
+    --color-background-095: hsl(228, 100%, 98%);
+    --color-background-100: hsl(228, 100%, 100%);
+
+    --color-foreground-100: hsl(228, 100%, 100%);
+    --color-foreground-095: hsl(228, 100%, 98%);
+    --color-foreground-090: hsl(226, 35%, 93%);
+    --color-foreground-085: hsl(228, 24%, 88%);
+    --color-foreground-080: hsl(227, 17%, 77%);
+    --color-foreground-070: hsl(229, 13%, 67%);
+    --color-foreground-060: hsl(227, 11%, 57%);
+    --color-foreground-050: hsl(227, 9%, 48%);
+    --color-foreground-040: hsl(226, 11%, 39%);
+    --color-foreground-030: hsl(224, 13%, 30%);
+    --color-foreground-020: hsl(228, 14%, 21%);
+    --color-foreground-015: hsl(228, 16%, 13%);
+    --color-foreground-010: hsl(231, 16%, 8%);
+    --color-foreground-005: hsl(225, 18%, 4%);
+    --color-foreground-000: hsl(225, 0%, 0%);
+  }
+
+  /* .dark {
+
+  } */
+}
+
+body {
+  @apply bg-[var(--color-background-015)] text-[var(--color-foreground-100)];
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 a {
@@ -24,49 +95,4 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
