@@ -1,11 +1,19 @@
 import { useTheme } from '@/context/ThemeProvider';
+import Button from '../common/Button';
 
 function ThemeSwitcher() {
   const { isDarkMode, toggleTheme } = useTheme();
 
-  console.log(isDarkMode);
-
-  return <button onClick={toggleTheme}>{isDarkMode ? 'Light' : 'Dark'}</button>;
+  return (
+    <Button
+      size="sm"
+      color={isDarkMode ? 'primary' : 'dark'}
+      onClick={toggleTheme}
+      className="rounded-md"
+    >
+      {isDarkMode ? 'Light' : 'Dark'}
+    </Button>
+  );
 }
 
 export default ThemeSwitcher;

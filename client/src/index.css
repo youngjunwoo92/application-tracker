@@ -4,80 +4,120 @@
 
 @layer base {
   :root {
-    --color-background-000: hsl(228, 100%, 100%);
-    --color-background-005: hsl(228, 100%, 98%);
-    --color-background-010: hsl(226, 35%, 93%);
-    --color-background-015: hsl(228, 24%, 88%);
-    --color-background-020: hsl(227, 17%, 77%);
-    --color-background-030: hsl(229, 13%, 67%);
-    --color-background-040: hsl(227, 11%, 57%);
-    --color-background-050: hsl(227, 9%, 48%);
-    --color-background-060: hsl(226, 11%, 39%);
-    --color-background-070: hsl(224, 13%, 30%);
-    --color-background-080: hsl(228, 14%, 21%);
-    --color-background-085: hsl(228, 16%, 13%);
-    --color-background-090: hsl(231, 16%, 8%);
-    --color-background-095: hsl(225, 18%, 4%);
-    --color-background-100: hsl(225, 0%, 0%);
+    --color-primary: 213, 77%, 48%;
+    --color-primary-bg: 213, 76%, 55%;
+    --color-primary-fg: 0, 0%, 100%;
+    --color-primary-bg-hover: 213, 76%, 45%;
 
-    --color-foreground-100: hsl(225, 0%, 0%);
-    --color-foreground-095: hsl(225, 18%, 4%);
-    --color-foreground-090: hsl(231, 16%, 8%);
-    --color-foreground-085: hsl(228, 16%, 13%);
-    --color-foreground-080: hsl(228, 14%, 21%);
-    --color-foreground-070: hsl(224, 13%, 30%);
-    --color-foreground-060: hsl(226, 11%, 39%);
-    --color-foreground-050: hsl(227, 9%, 48%);
-    --color-foreground-040: hsl(227, 11%, 57%);
-    --color-foreground-030: hsl(229, 13%, 67%);
-    --color-foreground-020: hsl(227, 17%, 77%);
-    --color-foreground-015: hsl(228, 24%, 88%);
-    --color-foreground-010: hsl(226, 35%, 93%);
-    --color-foreground-005: hsl(228, 100%, 98%);
-    --color-foreground-000: hsl(228, 100%, 100%);
+    --color-error: 356, 75%, 43%;
+    --color-error-bg: 357, 78%, 49%;
+    --color-error-fg: 255, 255, 255, 1;
+    --color-error-bg-hover: 357, 78%, 39%;
+
+    --color-success: 152, 66%, 31%;
+    --color-success-bg: 152, 62%, 47%;
+    --color-success-fg: 255, 255, 255, 1;
+    --color-success-bg-hover: 152, 62%, 37%;
+
+    --color-warning: 42, 96%, 31%;
+    --color-warning-bg: 42, 92%, 47%;
+    --color-warning-fg: 0, 0, 0, 0.8;
+    --color-warning-bg-hover: 42, 92%, 37%;
+
+    --color-dark: 0, 0%, 100%;
+    --color-dark-bg: 0, 0%, 90%;
+    --color-dark-fg: 0, 0, 0, 0.8;
+    --color-dark-bg-hover: 0, 0%, 90%;
+
+    --color-window-bg: 0, 0%, 98%;
+    --color-window-fg: 0, 0, 0, 0.8;
+
+    --color-sidebar-bg: 0, 0%, 95%;
+    --color-sidebar-fg: 0, 0, 0, 0.8;
+    --color-sidebar-shade: 0, 0, 0, 0.07;
+    --color-sidebar-active-bg: 0, 0%, 87%;
+
+    --color-card-bg: 225, 225, 225, 0.8;
+    --color-card-fg: 0, 0, 0, 0.8;
+    --color-card-shade: 0, 0, 0, 0.07;
+
+    --color-text-primary: 0, 0, 0, 87%;
+    --color-text-secondary: 0, 0, 0, 60%;
+    --color-text-disabled: 0, 0, 0, 38%;
+
+    --color-divider-light: 0, 0%, 93%;
+    --color-divider-dark: 0, 0%, 90%;
   }
 
   .dark {
-    --color-background-000: hsl(225, 0%, 0%);
-    --color-background-005: hsl(225, 18%, 4%);
-    --color-background-010: hsl(231, 16%, 8%);
-    --color-background-015: hsl(228, 16%, 13%);
-    --color-background-020: hsl(228, 14%, 21%);
-    --color-background-030: hsl(224, 13%, 30%);
-    --color-background-040: hsl(226, 11%, 39%);
-    --color-background-050: hsl(227, 9%, 48%);
-    --color-background-060: hsl(227, 11%, 57%);
-    --color-background-070: hsl(229, 13%, 67%);
-    --color-background-080: hsl(227, 17%, 77%);
-    --color-background-085: hsl(228, 24%, 88%);
-    --color-background-090: hsl(226, 35%, 93%);
-    --color-background-095: hsl(228, 100%, 98%);
-    --color-background-100: hsl(228, 100%, 100%);
+    --color-primary: 212, 76%, 70%;
+    --color-primary-dark: 213, 76%, 40%;
+    --color-primary-bg: 213, 76%, 55%;
+    --color-primary-bg-hover: 213, 76%, 45%;
+    --color-primary-fg: 0, 0%, 100%;
 
-    --color-foreground-100: hsl(228, 100%, 100%);
-    --color-foreground-095: hsl(228, 100%, 98%);
-    --color-foreground-090: hsl(226, 35%, 93%);
-    --color-foreground-085: hsl(228, 24%, 88%);
-    --color-foreground-080: hsl(227, 17%, 77%);
-    --color-foreground-070: hsl(229, 13%, 67%);
-    --color-foreground-060: hsl(227, 11%, 57%);
-    --color-foreground-050: hsl(227, 9%, 48%);
-    --color-foreground-040: hsl(226, 11%, 39%);
-    --color-foreground-030: hsl(224, 13%, 30%);
-    --color-foreground-020: hsl(228, 14%, 21%);
-    --color-foreground-015: hsl(228, 16%, 13%);
-    --color-foreground-010: hsl(231, 16%, 8%);
-    --color-foreground-005: hsl(225, 18%, 4%);
-    --color-foreground-000: hsl(225, 0%, 0%);
+    --color-error: 9, 100%, 69%;
+    --color-error-bg: 356, 75%, 43%;
+    --color-error-bg-hover: 9, 100%, 33%;
+    --color-error-fg: 255, 255, 255, 1;
+
+    --color-success: 133, 76%, 75%;
+    --color-success-bg: 152, 62%, 39%;
+    --color-success-bg-hover: 152, 62%, 29%;
+    --color-success-fg: 255, 255, 255, 1;
+
+    --color-warning: 52, 92%, 67%;
+    --color-warning-bg: 42, 92%, 42%;
+    --color-warning-bg-hover: 42, 92%, 32%;
+    --color-warning-fg: 0, 0, 0, 0.8;
+
+    --color-dark: 0, 0%, 15%;
+    --color-dark-bg: 0, 0%, 30%;
+    --color-dark-bg-hover: 0, 0%, 100%;
+    --color-dark-fg: 0, 0, 0, 0.8;
+
+    --color-window-bg: 0, 0%, 12%;
+    --color-window-fg: 255, 255, 255, 1;
+
+    --color-sidebar-bg: 0, 0%, 14%;
+    --color-sidebar-fg: 255, 255, 255, 1;
+    --color-sidebar-shade: 0, 0, 0, 0.36;
+    --color-sidebar-active-bg: 0, 0%, 24%;
+
+    --color-card-bg: 255, 255, 255, 0.08;
+    --color-card-fg: 255, 255, 255, 1;
+    --color-card-shade: 0, 0, 0, 0.36;
+
+    --color-text-primary: 255, 255, 255, 87%;
+    --color-text-secondary: 255, 255, 255, 60%;
+    --color-text-disabled: 255, 255, 255, 38%;
+
+    --color-divider-light: 0, 0%, 20%;
+    --color-divider-dark: 0, 0%, 16%;
   }
 
-  /* .dark {
+  body {
+    @apply bg-window-bg text-window-fg;
+  }
 
-  } */
-}
+  h1 {
+    color: var(--red-white-mix);
+  }
 
-body {
-  @apply bg-[var(--color-background-015)] text-[var(--color-foreground-100)];
+  input {
+    border: none;
+    outline: none;
+  }
+
+  input:active {
+    border: none;
+    outline: none;
+  }
+
+  input:focus {
+    border: none;
+    outline: none;
+  }
 }
 
 *,
@@ -89,10 +129,6 @@ body {
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  text-decoration: none;
+  color: inherit;
 }
